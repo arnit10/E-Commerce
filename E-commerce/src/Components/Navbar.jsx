@@ -29,8 +29,8 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className='hidden md:flex space-x-6  '>
                 <NavLink className={'hover:text-blue-500'} to={'/'} >Home</NavLink>
-                <NavLink className={'hover:text-blue-500'} to={'/home'}>Categories</NavLink>
-                <NavLink className={'hover:text-blue-500'} to={'/home'}>Contact</NavLink>
+                <NavLink className={'hover:text-blue-500'} to={'#'}>Categories</NavLink>
+                <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
                 
             </div>
@@ -48,10 +48,10 @@ const Navbar = () => {
         </div>
         {/* Mobile menu */}
         <div className={`md:hidden ${isOpen ? 'flex flex-col':'hidden'} bg-gray-700 py-4 items-center text-2xl`} ref={menuRef}>
-            <NavLink className={'hover:text-blue-500'} to={'/home'} >Home</NavLink>
-            <NavLink className={'hover:text-blue-500'} to={'/home'}>Categories</NavLink>
-            <NavLink className={'hover:text-blue-500'} to={'/home'}>Contact</NavLink>
-            <NavLink className={'hover:text-blue-500'} to={'/home'}>About</NavLink>
+            <NavLink className={'hover:text-blue-500'} to={'#'} >Home</NavLink>
+            <NavLink className={'hover:text-blue-500'} to={'#'}>Categories</NavLink>
+            <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
+            <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
             <NavLink className={'hover:text-blue-500'}>Cart</NavLink>
             <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
         </div>

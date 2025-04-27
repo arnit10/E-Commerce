@@ -8,6 +8,7 @@ import { Navbar } from './Components';
 import Footer from './Components/Footer';
 import About from './pages/About';
 import Layout from './layouts/Layout';
+import Contact from './pages/Contact';
 
 
 
@@ -18,12 +19,12 @@ function App() {
         <Route path='/' element={<Layout/>} > 
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          
           <Route path="/signup" element={<SignupPage />} />
           <Route path = "/profile/:username" element={<Profile/>}/>
           <Route path ="/navbar" element={<Navbar/>} />
           <Route path ="/footer" element={<Footer/>} />
           <Route path ="/about" element={<About/>} />
+          <Route path='/contact' element={<Contact/>}/>
         </Route>  
       </Routes>
     </BrowserRouter>
