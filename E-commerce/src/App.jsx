@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 import About from './pages/About';
 import Layout from './layouts/Layout';
 import Contact from './pages/Contact';
+import Categories from './pages/Categories';
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path ="/footer" element={<Footer/>} />
           <Route path ="/about" element={<About/>} />
           <Route path='/contact' element={<Contact/>}/>
+          <Route path='/categories' element={<Categories/>}/>
         </Route>  
       </Routes>
     </BrowserRouter>

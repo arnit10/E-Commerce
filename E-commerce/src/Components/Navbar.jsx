@@ -25,11 +25,11 @@ const Navbar = () => {
   return (
     <nav className='bg-gray-800 text-white shadow-md'>
         <div className='flex p-6 text-xl justify-between'>
-            <Link  to={"/"} >My Shop</Link>
+            <Link  to={"/"} >NextCart</Link>
             {/* Desktop Menu */}
             <div className='hidden md:flex space-x-6  '>
                 <NavLink className={'hover:text-blue-500'} to={'/'} >Home</NavLink>
-                <NavLink className={'hover:text-blue-500'} to={'#'}>Categories</NavLink>
+                <NavLink className={'hover:text-blue-500'} to={'/categories'}>Categories</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
                 
