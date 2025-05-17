@@ -1,10 +1,30 @@
 import React, { useState , useRef, useEffect} from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { login , logout } from '../features/auth/authSlice';
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const {user , isLoggedIn} = useSelector((state) => state.auth)
     const [isOpen , setIsOpen] = useState(false)
     const menuRef = useRef(null)
     const btnRef = useRef(null)
+
+    const handleLogin = () => {
+        const dummyUser = {
+        name: 'John Doe',
+        email: 'john@example.com',
+        };
+        const dummyToken = 'fake-jwt-token';
+
+        dispatch(login({ user: dummyUser, token: dummyToken }));
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+    };
+
+    
 
     const ToggleMenu = () =>{
         setIsOpen(!isOpen)
@@ -27,17 +47,29 @@ const Navbar = () => {
         <div className='flex p-6 text-xl justify-between'>
             <Link  to={"/"} >NextCart</Link>
             {/* Desktop Menu */}
-            <div className='hidden md:flex space-x-6  '>
+            <div className='hidden md:flex space-x-6'>
                 <NavLink className={'hover:text-blue-500'} to={'/'} >Home</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/categories'}>Categories</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
                 
             </div>
-            <div className='hidden md:flex space-x-8'>
+            <div className='hidden md:flex space-x-8 w-60 justify-around'>
+                {isLoggedIn ? (<>
+                <p>{user.name}</p>
+                <button onClick={()=> dispatch(logout())}>Logout</button>
+                </>):(<>
+                    {/* <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
+                    */}
+                    <button onClick={handleLogin}>Login</button>
+                    <NavLink className={'hover:text-blue-500'} to={'/signup'}>Signup</NavLink>
+                </>)}
+            </div>
+            {/* <div className='hidden md:flex space-x-8'>
                 <NavLink className={'hover:text-blue-500'}>Cart</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
-            </div>
+                <NavLink className={'hover:text-blue-500'} to={'/signup'}>Signup</NavLink>
+            </div> */}
 
             {/* Mobile Menu Toggle */}
             <div className=' md:hidden '>
@@ -53,7 +85,15 @@ const Navbar = () => {
             <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
             <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
             <NavLink className={'hover:text-blue-500'}>Cart</NavLink>
-            <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
+            {isLoggedIn ? (<>
+                <p>{user.name}</p>
+                <button onClick={()=> dispatch(logout())}>Logout</button>
+            </>):(<>
+                {/* <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
+                 */}
+                 <button onClick={handleLogin}>Login with Dummy Data</button>
+            </>)}
+            
         </div>
     </nav>
   )
