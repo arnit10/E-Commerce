@@ -28,10 +28,18 @@ const productSchema = new mongoose.Schema({
         ref: 'Category',
         required: true
     },
+    mrp:{
+        type: String,
+        required:true,
+        default:0
+    },
     price:{
         type: String,
         required:true,
         default: 0
+    },
+    discount:{
+        type: String,
     }
 },{timestamps: true})
 

@@ -21,6 +21,7 @@ const Navbar = () => {
     };
 
     const handleLogout = () => {
+        localStorage.removeItem("token")
         dispatch(logout());
     };
 
@@ -56,12 +57,12 @@ const Navbar = () => {
             </div>
             <div className='hidden md:flex space-x-8 w-60 justify-around'>
                 {isLoggedIn ? (<>
-                <p>{user.name}</p>
+                <p>{user?.name}</p>
                 <button onClick={()=> dispatch(logout())}>Logout</button>
                 </>):(<>
-                    {/* <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
-                    */}
-                    <button onClick={handleLogin}>Login</button>
+                    <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
+                   
+                    {/* <button onClick={handleLogin}>Login</button> */}
                     <NavLink className={'hover:text-blue-500'} to={'/signup'}>Signup</NavLink>
                 </>)}
             </div>
@@ -86,8 +87,8 @@ const Navbar = () => {
             <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
             <NavLink className={'hover:text-blue-500'}>Cart</NavLink>
             {isLoggedIn ? (<>
-                <p>{user.name}</p>
-                <button onClick={()=> dispatch(logout())}>Logout</button>
+                <p>{user?.name}</p>
+                <button onClick={handleLogout}>Logout</button>
             </>):(<>
                 {/* <NavLink className={'hover:text-blue-500'} to={'/login'}>Login</NavLink>
                  */}

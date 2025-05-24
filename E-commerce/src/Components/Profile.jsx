@@ -1,12 +1,14 @@
 import React , {useEffect} from 'react'
 import { useLocation , useNavigate , useParams} from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { logout as logoutAction } from '../features/auth/authSlice';
 
 const Profile = () => {
+    const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const user = location.state;
-    const { username } = useParams();
+    const { name } = useParams();
   
     useEffect(() => {
       // If no user data, redirect to login page
@@ -21,9 +23,10 @@ const Profile = () => {
   
     const handleLogout = async()=>{
       try{
-        await axios.get('http://127.0.0.1:8000/auth/logout/', { withCredentials: true })
-        navigate('/')
-        alert('logged out successfully')
+        localStorage.removeItem("token"); // Clear token from localStorage
+        dispatch(logoutAction());         // Clear Redux auth state
+        navigate('/');                    // Redirect to homepage
+        alert('Logged out successfully');
       }catch(err){
         console.error(err)
       }
@@ -32,11 +35,9 @@ const Profile = () => {
     return (
       <div className='flex items-center justify-center'>
         <div className=' m-10 p-10 flex flex-col border rounded-3xl  gap-8 ' >
-        <h1 className='text-4xl mb-30 '> Welcome, {user.first_name}!</h1>
-        <p ><b>Username:</b> {user.username}</p>
+        <h1 className='text-4xl mb-30 '> Welcome, {user.name}!</h1>
+        <p ><b>User name:</b> {user.name}</p>
         <p><b>Email:</b> {user.email}</p>
-        <p><b>Full Name:</b> {user.first_name} {user.last_name}</p>
-      
         <button
             className='mt-10 px-5 py-5 bg-red-600 text-white border-0 rounded-2xl cursor-pointer max-w-90'
           
@@ -46,8 +47,6 @@ const Profile = () => {
         </button>
       </div>
       </div>
-  
-      // <h1>Welcome, {username}!</h1>
     )
 }
 

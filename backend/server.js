@@ -6,14 +6,20 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const app = express()
-app.use(cors())
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials:true,
+}))
 app.use(express.json())
 
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 app.use('/api/categories', categoryRoutes)
 app.use('/api/products', productRoutes)
+app.use('/api/auth', authRoutes)
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
