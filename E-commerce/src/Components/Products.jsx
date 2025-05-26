@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {useDispatch} from 'react-redux'
+import { addToCart } from "../features/cart/cartSlice";
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-
-  // Replace with your actual backend endpoint
   const BASE_URL = "http://localhost:5000/api/products";
+  
+  const dispatch = useDispatch()
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,7 +44,9 @@ const Products = () => {
             <h3 className="text-lg font-medium">{product.title}</h3>
             <p className="text-gray-700">{product.brand}</p>
             <p>₹{product.price}</p>
-            <button className="mt-2 px-4 py-1 bg-black text-white rounded">Add to Cart</button>
+            <button 
+            onClick={()=>handleAddToCart(product)}
+            className="mt-2 px-4 py-1 bg-black text-white rounded">Add to Cart</button>
           </div>
         ))}
       </div>

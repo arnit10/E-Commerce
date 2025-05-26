@@ -53,6 +53,7 @@ const Navbar = () => {
                 <NavLink className={'hover:text-blue-500'} to={'/categories'}>Categories</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/contact'}>Contact</NavLink>
                 <NavLink className={'hover:text-blue-500'} to={'/about'}>About</NavLink>
+                <NavLink className={'hover:text-blue-500'} to={'/cart'}>Cart</NavLink>
                 
             </div>
             <div className='hidden md:flex space-x-8 w-60 justify-around'>
