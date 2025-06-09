@@ -1,36 +1,36 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
 
-const ProductCard = () => {
-    const [loading , setLoading] = useState(false)
-    const [products , setProducts] = useState([])
+const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
 
-    const fetchData = async() =>{
-        setLoading(true)
-        try{
-            const res = await axios.get('https://dummyjson.com/products')
-             setProducts(res.data.products)
-        }catch(err){
-            console.error( "unable to load data....", err )
-        }finally{
-            setLoading(false)
-        }
-    }
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
-    useEffect(()=>{
-        fetchData()
-    },[])
   return (
-    <div>
-        Product page
-
-        {products && products.map(product => (
-            <div key={product.id}>
-                <p>{product.title}</p>
-            </div>
-        ))}
+    <div className="border rounded p-4 shadow hover:shadow-md transition">
+      <div className="h-80 bg-gray-100 mb-2">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <h3 className="text-lg font-medium">
+        {product.title.length > 28 ? product.title.slice(0, 28) + "..." : product.title}
+      </h3>
+      <p className="text-gray-700">{product.brand}</p>
+      <p>₹{product.price}</p>
+      <button
+        onClick={handleAddToCart}
+        className="mt-2 px-4 py-1 bg-black text-white rounded"
+      >
+        Add to Cart
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

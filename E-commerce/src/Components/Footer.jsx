@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-10 ">
         <div className='flex flex-row justify-between px-6'>
             <div>
-                <h2>My Shop</h2>
+                <h2>NextCart</h2>
                 <p>Your one stop solution for electronics..</p>
             </div>
             <div>
@@ -27,7 +27,7 @@ const Footer = () => {
             
         </div>
         <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} My Shop. All rights reserved.
+            © {new Date().getFullYear()} NextCart. All rights reserved.
             </div>
     </footer>
   )

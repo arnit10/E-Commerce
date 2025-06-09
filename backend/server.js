@@ -13,10 +13,12 @@ app.use(cors({
 app.use(express.json())
 
 const categoryRoutes = require('./routes/categoryRoutes')
+const productByCategoryRoutes = require('./routes/productByCategory');
 const productRoutes = require('./routes/productRoutes')
 const authRoutes = require('./routes/authRoutes')
 
 app.use('/api/categories', categoryRoutes)
+app.use('/api/products', productByCategoryRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/auth', authRoutes)
 
