@@ -14,6 +14,12 @@ import Categories from './pages/Categories';
 import ProductListByCategory from './Components/ProductListByCategory';
 import CartPage from './pages/CartPage';
 import ThankYou from './pages/ThankYou';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminLogin from './pages/Admin/AdminLogin';
+import AdminRegister from './pages/Admin/AdminRegister';
+import LayoutForAdmin from './layouts/LayoutForAdmin';
+import AddProduct from './Components/Admin/AddProduct';
+import EditProduct from './Components/Admin/EditProduct';
 
 
 
@@ -31,8 +37,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path = "/profile/:username" element={<Profile/>}/>
-          <Route path ="/navbar" element={<Navbar/>} />
-          <Route path ="/footer" element={<Footer/>} />
           <Route path ="/about" element={<About/>} />
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/categories' element={<Categories/>}/>
@@ -40,7 +44,18 @@ function App() {
           <Route path= '/cart' element={<CartPage/>}/>
           <Route path= '/thank-you' element={<ThankYou/>}/>
 
+          //admin paths
+          {/* <Route path="/admin/login" element={<AdminLogin/>} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/register" element={<AdminRegister />} /> */}
+
         </Route>  
+        <Route path="/admin" element={<LayoutForAdmin />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path='/admin/add-product' element={<AddProduct/>}/>
+          <Route path='/admin/edit-product/:id' element={<EditProduct/>}/>
+        </Route>
+        <Route path="/admin/login" element={<AdminLogin/>}/>
       </Routes>
     </BrowserRouter>
   );
