@@ -1,29 +1,111 @@
-const express = require('express')
-const router = express.Router()
-const Subcategory = require('../models/Subcategory')
+// const express = require('express')
+// const router = express.Router()
+// const Subcategory = require('../models/Subcategory')
+// const { verifyAdmin } = require('../middleware/authMiddleware');
 
-//get all subcategory
-router.get('/', async (req , res)=> {
-    try{
-        const subcategories = await Subcategory.find()
-        res.json(subcategories)
+// //get all subcategory
+// router.get('/', async (req , res)=> {
+//     try{
+//         const subcategories = await Subcategory.find()
+//         res.json(subcategories)
+//     }
+//     catch(err){
+//         res.status(400).json({message:'error: ',err})
+//     }
+// })
+
+// //add subcategory
+// router.post('/', verifyAdmin, async (req,res)=>{
+//     try{
+//         const newSubcategory = new Subcategory(req.body)
+//         await newSubcategory.save()
+//         res.json(newSubcategory)
+//     }catch(err){
+//         res.status(400).json({message:"error: ",err})
+//     }
+// })
+
+// //delete subcategory
+// router.delete('/:id', verifyAdmin, async (req, res) => {
+//   try {
+//     const deleted = await Subcategory.findByIdAndDelete(req.params.id);
+//     if (!deleted) return res.status(404).json({ message: 'Subcategory not found' });
+//     res.json({ message: 'Subcategory deleted successfully' });
+//   } catch (err) {
+//     res.status(500).json({ message: 'Failed to delete subcategory', error: err.message });
+//   }
+// });
+
+// module.exports = router
+
+const express = require('express');
+const mongoose = require('mongoose');
+const router = express.Router();
+const Subcategory = require('../models/Subcategory');
+const { verifyAdmin } = require('../middleware/authMiddleware');
+
+// ✅ Get subcategories (optionally filtered by categoryId)
+router.get('/', async (req, res) => {
+  try {
+    const { categoryId } = req.query;
+
+    let subcategories;
+    if (categoryId) {
+      subcategories = await Subcategory.find({ category: categoryId });
+    } else {
+      subcategories = await Subcategory.find();
     }
-    catch(err){
-        res.status(400).json({message:'error: ',err})
+
+    res.json(subcategories);
+  } catch (err) {
+    res.status(400).json({ message: 'Error fetching subcategories', error: err.message });
+  }
+});
+
+// Add subcategory
+// router.post('/', verifyAdmin, async (req, res) => {
+//   try {
+//     console.log("Incoming body:", req.body);
+//     const newSubcategory = new Subcategory(req.body);
+//     await newSubcategory.save();
+//     res.json(newSubcategory);
+//   } catch (err) {
+//     res.status(400).json({ message: 'Error adding subcategory', error: err.message });
+//   }
+// });
+router.post("/", verifyAdmin, async (req, res) => {
+  try {
+    const { name, category } = req.body;
+
+    // 🔍 Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(category)) {
+      return res.status(400).json({ message: "Invalid category ID" });
     }
-})
 
-//add subcategory
-router.post('/', async (req,res)=>{
-    try{
-        const newSubcategory = new Subcategory(req.body)
-        await newSubcategory.save()
-        res.json(newSubcategory)
-    }catch(err){
-        res.status(400).json({message:"error: ",err})
+    const newSubcategory = new Subcategory({ name, category });
+    await newSubcategory.save();
+
+    res.json(newSubcategory);
+  } catch (err) {
+    console.error("Add subcategory error:", err);
+    if (err.code === 11000) {
+      return res.status(400).json({ message: "Subcategory already exists for this category" });
     }
-})
+    res.status(400).json({ message: err.message || "Bad Request" });
+  }
+});
 
 
 
-module.exports = router
+// Delete subcategory
+router.delete('/:id', verifyAdmin, async (req, res) => {
+  try {
+    const deleted = await Subcategory.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: 'Subcategory not found' });
+    res.json({ message: 'Subcategory deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete subcategory', error: err.message });
+  }
+});
+
+module.exports = router;

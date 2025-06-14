@@ -43,6 +43,7 @@ import productByCategoryRoutes from './routes/productByCategory.js';
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import subCategoryRoutes from './routes/subCategoryRoutes.js'
 
 dotenv.config();
 
@@ -60,6 +61,7 @@ app.use('/api/products', productByCategoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/subcategories', subCategoryRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

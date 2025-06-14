@@ -1,25 +1,3 @@
-// import express from 'express'
-// import {loginAdmin} from '../controllers/adminController.js'
-// import Admin from '../models/Admin.js';
-
-// const router = express.Router()
-
-// router.post("/login", loginAdmin)
-
-// router.post("/register", async (req, res) => {
-//   const { email, password } = req.body;
-//   const existing = await Admin.findOne({ email });
-//   if (existing) return res.status(400).json({ message: "Admin already exists" });
-
-//   const newAdmin = new Admin({ email, password });
-//   await newAdmin.save();
-
-//   res.status(201).json({ message: "Admin created" });
-// });
-
-
-// module.exports = router
-
 import express from 'express';
 import Admin from '../models/Admin.js';
 import { loginAdmin } from '../controllers/adminController.js';

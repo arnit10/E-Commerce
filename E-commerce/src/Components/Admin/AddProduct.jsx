@@ -9,12 +9,14 @@ const AddProduct = () => {
     image: '',
     inStock: true,
     category: '',
+    subcategory: '',
     mrp: '',
     price: '',
     discount: ''
   });
 
   const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -31,13 +33,31 @@ const AddProduct = () => {
       ...product,
       [name]: type === 'checkbox' ? checked : value
     });
+    if (name === "category") {
+    fetchSubcategories(value);
+    }
   };
+
+  const fetchSubcategories = async (categoryId) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/api/subcategories?categoryId=${categoryId}`);
+      setSubcategories(res.data);
+    } catch (error) {
+      console.error("Failed to fetch subcategories", error);
+      setSubcategories([]); // reset if failed
+    }
+    };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/products', product);
+      const token = localStorage.getItem('adminToken')
+      const res = await axios.post('http://localhost:5000/api/products', product, 
+      {headers: {
+      Authorization: `Bearer ${token}`
+      }});
       setMessage('✅ Product added successfully!');
       setProduct({
         title: '', description: '', brand: '', image: '', inStock: true,
@@ -71,6 +91,21 @@ const AddProduct = () => {
             <option key={cat._id} value={cat._id}>{cat.name}</option>
           ))}
         </select>
+
+        {product.category && (
+  <select
+    name="subcategory"
+    value={product.subcategory}
+    onChange={handleChange}
+    className="w-full p-2 border rounded"
+    required
+  >
+    <option value="">Select Subcategory</option>
+    {subcategories.map(sub => (
+      <option key={sub._id} value={sub._id}>{sub.name}</option>
+    ))}
+  </select>
+)}
 
         <label className="flex items-center">
           <input type="checkbox" name="inStock" checked={product.inStock} onChange={handleChange} className="mr-2" />

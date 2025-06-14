@@ -10,9 +10,10 @@ const AdminNavbar = () => {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/admin/login'); // Redirect to admin login page
+  localStorage.removeItem("adminToken");
+  navigate('/admin/login');
   };
+
 
   return (
     <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
@@ -31,10 +32,10 @@ const AdminNavbar = () => {
         </li>
         <li>
           <NavLink 
-            to="/admin/products" 
+            to="/admin/products-by-category" 
             className={({ isActive }) => isActive ? 'underline' : ''}
           >
-            Products
+            Categories
           </NavLink>
         </li>
         <li>

@@ -1,4 +1,3 @@
-// pages/Admin/AdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +24,7 @@ const AdminDashboard = () => {
         },  
       });
       alert("Product deleted");
-      fetchProducts(); // reload list
+      fetchProducts();
     } catch (err) {
       alert("Error deleting product");
     }

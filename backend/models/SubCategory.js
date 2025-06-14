@@ -5,7 +5,7 @@ const SubcategorySchema = new mongoose.Schema({
     name:{
         type: String,
         required:true,
-        unique:true,
+        trim:true,
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
@@ -13,5 +13,7 @@ const SubcategorySchema = new mongoose.Schema({
         required:true
     }
 },{timestamps:true})
+
+SubcategorySchema.index({ name: 1, category: 1 }, { unique: true })
 
 module.exports = mongoose.model('Subcategory', SubcategorySchema)
