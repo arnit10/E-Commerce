@@ -26,6 +26,7 @@ import AdminRegister from "./pages/Admin/AdminRegister";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddProduct from "./Components/Admin/AddProduct";
 import EditProduct from "./Components/Admin/EditProduct";
+import AdminUsers from "./Components/Admin/AdminUsers";
 
 // Protected Route
 import AdminPrivateRoute from "./Components/Admin/AdminPrivateRoute";
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="add-product" element={<AddProduct />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
           <Route path="products-by-category" element={<Categories />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
         </Route>
 
         {/* Admin Public Routes */}

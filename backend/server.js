@@ -62,6 +62,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/subcategories', subCategoryRoutes);
+// app.use('/api/users', authRoutes);
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
