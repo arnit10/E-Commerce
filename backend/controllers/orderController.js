@@ -1,14 +1,14 @@
 const Order = require("../models/Order");
 
 const createOrder = async (req, res) => {
-  const { userId, cartItems, totalAmount } = req.body;
+  const { userId, cartItems, totalAmount, shippingAddress } = req.body;
 
-  if (!userId || !cartItems || !totalAmount) {
+  if (!userId || !cartItems || !totalAmount || !shippingAddress) {
     return res.status(400).json({ message: "Missing order data" });
   }
 
   try {
-    const newOrder = new Order({ userId, cartItems, totalAmount });
+    const newOrder = new Order({ userId, cartItems, totalAmount, shippingAddress });
     await newOrder.save();
     res.status(201).json({ message: "Order placed", order: newOrder });
   } catch (error) {

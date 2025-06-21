@@ -62,6 +62,16 @@ const AdminOrders = () => {
               <p className="text-sm text-gray-700 font-bold mt-2">Total: ₹{order.totalAmount}</p>
               <p className="text-sm text-gray-700">Ordered At: {dayjs(order.orderedAt).format("DD MMM YYYY hh:mm A")}</p>
               <p className="text-sm text-gray-700 font-bold mt-2">Total: ₹{order.totalAmount}</p>
+              {order.shippingAddress && (<p className="underline font-semibold mt-3">Shipping Address:</p>
+) && (
+                <div className="text-sm text-gray-700 font-bold mt-2 space-y-1">
+                  <p>Name: {order.shippingAddress.name}</p>
+                  <p>Address Line 1: {order.shippingAddress.street}</p>
+                  <p>City: {order.shippingAddress.city}, State: {order.shippingAddress.state} - Pincode {order.shippingAddress.zip}</p>
+                  <p>📞 {order.shippingAddress.phone}</p>
+                </div>
+              )}
+
 
               {order.fulfilled ? (
                 <p className="text-green-600 font-semibold mt-2">

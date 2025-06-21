@@ -19,6 +19,14 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  shippingAddress: {
+    name: String,
+    street: String,
+    city: String,
+    state: String,
+    zip: String,
+    phone: String,
+  },
   orderedAt: {
     type: Date,
     default: Date.now,

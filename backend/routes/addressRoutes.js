@@ -8,15 +8,16 @@ const {
 } = require("../controllers/addressController");
 
 const verifyAdmin = require("../middleware/authMiddleware");
+const verifyUser = require("../middleware/verifyUser")
 
 router
   .route("/")
-  .get(verifyAdmin, getAddresses)
-  .post(verifyAdmin, addAddress);
+  .get(verifyUser, getAddresses)
+  .post(verifyUser, addAddress);
 
 router
   .route("/:id")
-  .put(verifyAdmin, updateAddress)
-  .delete(verifyAdmin, deleteAddress);
+  .put(verifyUser, updateAddress)
+  .delete(verifyUser, deleteAddress);
 
 module.exports = router;
