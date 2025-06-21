@@ -1,11 +1,18 @@
 import React from "react";
+import {useNavigate} from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleAddToCart = () => {
+    const token = localStorage.getItem('token')
+    if(!token){
+      navigate("/login")
+      return
+    }
     dispatch(addToCart(product));
   };
 
@@ -25,7 +32,7 @@ const ProductCard = ({ product }) => {
       <p>₹{product.price}</p>
       <button
         onClick={handleAddToCart}
-        className="mt-2 px-4 py-1 bg-black text-white rounded"
+        className="mt-2 px-4 py-1 bg-black text-white rounded hover:bg-blue-500"
       >
         Add to Cart
       </button>

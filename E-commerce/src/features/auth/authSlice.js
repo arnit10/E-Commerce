@@ -20,6 +20,7 @@ const authSlice = createSlice({
             state.isLoggedIn = true;
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("token", token);
+            // localStorage.setItem("userId", response.data.user._id)
         },
         logout: (state) => {
             state.user = null;

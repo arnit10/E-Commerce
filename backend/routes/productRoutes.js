@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/Product')
-const { verifyAdmin } = require('../middleware/authMiddleware'); 
+const verifyAdmin = require('../middleware/authMiddleware')
 
 
 //fetch all data

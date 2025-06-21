@@ -27,9 +27,11 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddProduct from "./Components/Admin/AddProduct";
 import EditProduct from "./Components/Admin/EditProduct";
 import AdminUsers from "./Components/Admin/AdminUsers";
+import AdminOrders from "./Components/Admin/AdminOrders";
 
 // Protected Route
 import AdminPrivateRoute from "./Components/Admin/AdminPrivateRoute";
+import Address from "./Components/Address";
 
 const App = () => {
   return (
@@ -54,6 +56,7 @@ const App = () => {
           <Route path="category/:name" element={<ProductListByCategory />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="thank-you" element={<ThankYou />} />
+          <Route path="address" element={<Address/>} />
         </Route>
 
         {/* Admin Layout with Protected Routes */}
@@ -68,8 +71,9 @@ const App = () => {
           <Route index element={<AdminDashboard />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
-          <Route path="products-by-category" element={<Categories />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="products-by-category" element={<Categories isAdmin={true} />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="orders" element={<AdminOrders/>} />
         </Route>
 
         {/* Admin Public Routes */}

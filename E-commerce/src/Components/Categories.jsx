@@ -145,7 +145,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Categories = ({ showSubcategories = true }) => {
+const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
   const [categories, setCategories] = useState([]);
   const [subcategoryMap, setSubcategoryMap] = useState({});
   const [subcategoryInputs, setSubcategoryInputs] = useState({});
@@ -219,24 +219,6 @@ const Categories = ({ showSubcategories = true }) => {
     }
   };
 
-//   // Add subcategory to category
-//   const handleAddSubcategory = async (categoryId) => {
-//     const name = subcategoryInputs[categoryId];
-//     if (!name || !name.trim()) return alert("Enter a subcategory name");
-
-//     try {
-//       await axios.post("http://localhost:5000/api/subcategories", {
-//         name,
-//         category: categoryId,
-//       });
-//       setSubcategoryInputs((prev) => ({ ...prev, [categoryId]: "" }));
-//       fetchSubcategories(categoryId); // refresh
-//     } catch (error) {
-//       console.error("Error adding subcategory", error);
-//       alert("Failed to add subcategory");
-//     }
-//   };
-
 const handleAddSubcategory = async (categoryId) => {
   const name = subcategoryInputs[categoryId];
   if (!name || !name.trim()) return alert("Enter a subcategory name");
@@ -297,14 +279,14 @@ const handleDeleteSubcategory = async (subcategoryId, categoryId) => {
       <h2 className="text-3xl font-bold text-center mb-6">Manage Categories</h2>
 
       {/* Add category toggle and form */}
-      <div className="flex justify-between mb-6">
+      {isAdmin && <div className="flex justify-between mb-6">
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-green-600 text-white px-4 py-2 rounded"
         >
           {showForm ? "Cancel" : "Add Category"}
         </button>
-      </div>
+      </div>}
 
       {showForm && (
         <form
@@ -335,7 +317,7 @@ const handleDeleteSubcategory = async (subcategoryId, categoryId) => {
             <h3 className="text-xl font-semibold mb-2">{cat.name}</h3>
 
             {/* Subcategory list */}
-            {showSubcategories && (
+            {isAdmin && showSubcategories && (
               <div className="mb-3">
                 {subcategoryMap[cat._id]?.length > 0 ? (
                   <ul className="text-gray-700 text-sm">
@@ -359,7 +341,7 @@ const handleDeleteSubcategory = async (subcategoryId, categoryId) => {
             )}
 
             {/* Add subcategory form */}
-            <div className="flex gap-2 justify-center">
+            {isAdmin && <div className="flex gap-2 justify-center">
               <input
                 type="text"
                 value={subcategoryInputs[cat._id] || ""}
@@ -378,15 +360,15 @@ const handleDeleteSubcategory = async (subcategoryId, categoryId) => {
               >
                 Add
               </button>
-            </div>
+            </div>}
 
             {/* Delete category button */}
-            <button
+            {isAdmin && <button
               onClick={() => handleDelete(cat._id)}
               className="mt-4 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
             >
               Delete
-            </button>
+            </button>}
           </div>
         ))}
       </div>

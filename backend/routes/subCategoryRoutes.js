@@ -42,7 +42,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Subcategory = require('../models/Subcategory');
-const { verifyAdmin } = require('../middleware/authMiddleware');
+const verifyAdmin  = require('../middleware/authMiddleware');
 
 // ✅ Get subcategories (optionally filtered by categoryId)
 router.get('/', async (req, res) => {
@@ -62,17 +62,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Add subcategory
-// router.post('/', verifyAdmin, async (req, res) => {
-//   try {
-//     console.log("Incoming body:", req.body);
-//     const newSubcategory = new Subcategory(req.body);
-//     await newSubcategory.save();
-//     res.json(newSubcategory);
-//   } catch (err) {
-//     res.status(400).json({ message: 'Error adding subcategory', error: err.message });
-//   }
-// });
 router.post("/", verifyAdmin, async (req, res) => {
   try {
     const { name, category } = req.body;

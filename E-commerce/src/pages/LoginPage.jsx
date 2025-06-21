@@ -28,7 +28,6 @@ export const LoginPage = () =>{
 
             if (response.data && response.data.user.name){
                 dispatch(login({ user: response.data.user, token: response.data.token }));
-                console.log("✅ User data:", response.data);
                 navigate(`/profile/${response.data.user.name}`, { state: response.data.user });
             }else {
                 alert("Invalid credentials or user not found");

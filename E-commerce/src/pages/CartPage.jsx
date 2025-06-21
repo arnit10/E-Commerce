@@ -1,7 +1,10 @@
 import React from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {removeFromCart, clearCart , increaseQuantity , decreaseQuantity} from "../features/cart/cartSlice"
 import {useNavigate} from 'react-router-dom'
+
+//   const cartItems = useSelector((state) => state.cart.cartItems);
 
 const CartPage = ()=>{
     const cartItems = useSelector(state => state.cart.cartItems || [])
@@ -10,10 +13,35 @@ const CartPage = ()=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleProceedToPay = () => {
-        alert("Order confirmed!! ")
-        navigate('/thank-you')
-    }
+    const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth.token);
+
+    const handleCheckout = async () => {
+  if (!token || !user?.id) {
+    navigate("/login");
+    return;
+  }
+
+  const orderData = {
+    userId: user.id,
+    cartItems,
+    totalAmount: totalPrice + 49,
+  };
+
+  try {
+    await axios.post("http://localhost:5000/api/orders", orderData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch(clearCart()); // Optional: clear cart after placing order
+    alert("Order confirmed!");
+    navigate("/thank-you");
+  } catch (error) {
+    console.error("Order failed", error);
+    alert("Something went wrong while placing the order.");
+  }
+};
+
     
     return(
         <div className="min-h-80 flex flex-col gap-2 pt-10">
@@ -77,7 +105,7 @@ const CartPage = ()=>{
                         <p>Cart Total: ₹{(totalPrice + 49).toLocaleString()}</p>
                         <button
                         className="bg-yellow-400 rounded-3xl p-3 hover:bg-yellow-300 font-bold"
-                         onClick={handleProceedToPay}
+                         onClick={handleCheckout}
                         >Proceed to buy</button>
                     </div>
                 </div>
