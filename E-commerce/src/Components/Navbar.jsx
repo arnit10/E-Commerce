@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, logout } from '../features/auth/authSlice'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -60,16 +61,16 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <div className='hidden md:flex space-x-8 w-60 justify-around'>
+        <div className='hidden md:flex space-x-8 w-40 justify-around'>
           {isLoggedIn ? (
             <>
               <NavLink className='hover:text-blue-500' to='/cart'>
-                Cart
+                <FontAwesomeIcon icon={faCartShopping} className="text-xl text-white hover:text-blue-400" />
               </NavLink>
 
               {/* USER DROPDOWN */}
               <div className='relative group '>
-                <p className='rounded-lg hover:bg-gray-700 cursor-pointer'>
+                <p className='hover:text-blue-500 cursor-pointer'>
                     {user?.name}
                 </p>
 
@@ -115,10 +116,10 @@ const Navbar = () => {
         } bg-gray-700 py-4 items-center text-2xl`}
         ref={menuRef}
       >
-        <NavLink className='hover:text-blue-500' to='#'>
+        <NavLink className='hover:text-blue-500' to='/'>
           Home
         </NavLink>
-        <NavLink className='hover:text-blue-500' to='#'>
+        <NavLink className='hover:text-blue-500' to='/categories'>
           Categories
         </NavLink>
         <NavLink className='hover:text-blue-500' to='/contact'>
@@ -127,9 +128,12 @@ const Navbar = () => {
         <NavLink className='hover:text-blue-500' to='/about'>
           About
         </NavLink>
-        <NavLink className='hover:text-blue-500'>Cart</NavLink>
+        
         {isLoggedIn ? (
           <>
+            <NavLink className='hover:text-blue-500' to="/cart">
+                Cart
+            </NavLink>
             <p>{user?.name}</p>
             <button onClick={handleLogout}>Logout</button>
           </>

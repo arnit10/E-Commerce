@@ -9,7 +9,7 @@ const Footer = () => {
                 <h2>NextCart</h2>
                 <p>Your one stop solution for electronics..</p>
             </div>
-            <div>
+            <div className='hidden md:block'>
                 <h3>Quick Links</h3>
                 <ul>
                     <li><Link to={"/"}>Home</Link></li>

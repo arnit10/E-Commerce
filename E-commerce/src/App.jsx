@@ -19,6 +19,7 @@ import Contact from "./pages/Contact";
 import ProductListByCategory from './Components/ProductListByCategory'
 import CartPage from "./pages/CartPage";
 import ThankYou from "./pages/ThankYou";
+import UserOrders from "./Components/UserOrders";
 
 // Pages (Admin)
 import AdminLogin from "./pages/Admin/AdminLogin";
@@ -32,6 +33,7 @@ import AdminOrders from "./Components/Admin/AdminOrders";
 // Protected Route
 import AdminPrivateRoute from "./Components/Admin/AdminPrivateRoute";
 import Address from "./Components/Address";
+
 
 const App = () => {
   return (
@@ -57,6 +59,7 @@ const App = () => {
           <Route path="cart" element={<CartPage />} />
           <Route path="thank-you" element={<ThankYou />} />
           <Route path="address" element={<Address/>} />
+          <Route path="my-orders" element={<UserOrders/>} />
         </Route>
 
         {/* Admin Layout with Protected Routes */}

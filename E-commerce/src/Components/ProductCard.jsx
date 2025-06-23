@@ -26,13 +26,14 @@ const ProductCard = ({ product }) => {
         />
       </div>
       <h3 className="text-lg font-medium">
-        {product.title.length > 28 ? product.title.slice(0, 28) + "..." : product.title}
+        {product.title.length > 28 ? product.title.slice(0, 24) + "..." : product.title}
       </h3>
       <p className="text-gray-700">{product.brand}</p>
-      <p>₹{product.price}</p>
+      <p className="line-through text-gray-500">₹{product.mrp}</p>
+      <p >₹{product.price}</p>
       <button
         onClick={handleAddToCart}
-        className="mt-2 px-4 py-1 bg-black text-white rounded hover:bg-blue-500"
+        className="mt-2 px-4 py-1 bg-black text-white rounded hover:bg-blue-500 active:scale-95"
       >
         Add to Cart
       </button>

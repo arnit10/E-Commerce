@@ -1,20 +1,28 @@
 import React,{useState} from 'react'
+import axios from 'axios'
 
 const Contact = () => {
     const [formData , setFormData] = useState({
         name:'',
         email:'',
-        message:''
+        message:'',
     })
 
     const handleChange = (e) =>{
         setFormData({...formData , [e.target.name]:e.target.value})
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
-        alert('Form Submitted..')
-        setFormData({name:'', email:'' , message: '' }) // will reset form
+        try{
+            await axios.post("http://localhost:5000/api/contact", formData)
+            alert('Form Submitted..')
+            setFormData({name:'', email:'' , message: '' }) // will reset form
+        }catch(error){
+            alert('Error submitting the form')
+            console.error(error)
+        }
+        
     }
   return (
     <div className='bg-gray-700 flex items-center justify-center'>
@@ -28,7 +36,7 @@ const Contact = () => {
             className="w-80 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             type='text'
             name='name'
-            placeholder='Your Name'
+            placeholder='Your Name here... '
             value={formData.name}
             onChange={handleChange}
             required
@@ -37,7 +45,7 @@ const Contact = () => {
             className="w-80 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="email"
             name='email'
-            placeholder='Your Email'
+            placeholder='Your email...'
             value={formData.email}
             onChange={handleChange}
             required
@@ -52,7 +60,7 @@ const Contact = () => {
             required
             />
             <button 
-            className='border rounded-lg w-40 p-4 hover:bg-gray-400'
+            className='border rounded-lg w-40 p-4 hover:bg-gray-400 elevate-90'
             type='submit'>Send Message</button>
             </form>
         </div>

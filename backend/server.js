@@ -11,6 +11,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import subCategoryRoutes from './routes/subCategoryRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import addressRoutes from './routes/addressRoutes.js'
+import contact from './routes/contact.js'
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use('/api/subcategories', subCategoryRoutes);
 // app.use('/api/users', authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/addresses", addressRoutes)
+app.use("/api/contact", contact)
 
 
 
