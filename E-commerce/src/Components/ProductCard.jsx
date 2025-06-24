@@ -16,8 +16,13 @@ const ProductCard = ({ product }) => {
     dispatch(addToCart(product));
   };
 
+  const handleClick = () =>{
+    navigate(`/product/${product._id}`)
+  }
+
   return (
-    <div className="border rounded p-4 shadow hover:shadow-md transition">
+    <div className="border rounded p-4 shadow hover:shadow-md transition"
+    onClick={handleClick}>
       <div className="h-80 bg-gray-100 mb-2">
         <img
           src={product.image}

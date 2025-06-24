@@ -33,6 +33,8 @@ import AdminOrders from "./Components/Admin/AdminOrders";
 // Protected Route
 import AdminPrivateRoute from "./Components/Admin/AdminPrivateRoute";
 import Address from "./Components/Address";
+import AdminInbox from "./Components/Admin/AdminInbox";
+import ProductDetails from "./pages/ProductDetails";
 
 
 const App = () => {
@@ -60,6 +62,7 @@ const App = () => {
           <Route path="thank-you" element={<ThankYou />} />
           <Route path="address" element={<Address/>} />
           <Route path="my-orders" element={<UserOrders/>} />
+          <Route path="product/:id" element={<ProductDetails/>} />
         </Route>
 
         {/* Admin Layout with Protected Routes */}
@@ -77,6 +80,7 @@ const App = () => {
           <Route path="products-by-category" element={<Categories isAdmin={true} />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="orders" element={<AdminOrders/>} />
+          <Route path="inbox" element={<AdminInbox/>} />
         </Route>
 
         {/* Admin Public Routes */}

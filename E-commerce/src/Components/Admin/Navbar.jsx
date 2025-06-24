@@ -55,6 +55,14 @@ const AdminNavbar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink 
+            to="/admin/inbox" 
+            className={({ isActive }) => isActive ? 'underline' : ''}
+          >
+            Inbox
+          </NavLink>
+        </li>
+        <li>
           <button
             onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded"

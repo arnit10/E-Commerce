@@ -27,4 +27,18 @@ const getAllContacts = async (req, res) => {
     }
 }
 
-module.exports = {createContact, getAllContacts}
+//update status
+const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updated = await Contact.findByIdAndUpdate(id, { status }, { new: true });
+    res.status(200).json(updated);
+  } catch (err) {
+    res.status(500).json({ message: "Error updating status" });
+  }
+}
+
+
+module.exports = {createContact, getAllContacts, updateStatus}
