@@ -19,15 +19,21 @@ const ProductCard = ({ product }) => {
   const handleClick = () =>{
     navigate(`/product/${product._id}`)
   }
+  console.log(product)
 
   return (
-    <div className="border rounded p-4 shadow hover:shadow-md transition"
-    onClick={handleClick}>
-      <div className="h-80 bg-gray-100 mb-2">
-        <img
+    <div className="border rounded p-4 shadow hover:shadow-md transition">
+      <div onClick={handleClick}>
+        <div className="h-80 bg-gray-100 mb-2">
+        {/* <img
           src={product.image}
           alt={product.title}
           className="h-full w-full object-cover"
+        /> */}
+        <img
+          src={`http://localhost:5000${product.images[0]}`}
+          alt={product.title}
+          className="w-full h-full object-cover rounded"
         />
       </div>
       <h3 className="text-lg font-medium">
@@ -36,6 +42,7 @@ const ProductCard = ({ product }) => {
       <p className="text-gray-700">{product.brand}</p>
       <p className="line-through text-gray-500">₹{product.mrp}</p>
       <p >₹{product.price}</p>
+      </div>
       <button
         onClick={handleAddToCart}
         className="mt-2 px-4 py-1 bg-black text-white rounded hover:bg-blue-500 active:scale-95"

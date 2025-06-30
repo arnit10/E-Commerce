@@ -1,17 +1,18 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const path = require('path');
 
-import categoryRoutes from './routes/categoryRoutes.js';
-import productByCategoryRoutes from './routes/productByCategory.js';
-import productRoutes from './routes/productRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-import adminRoutes from './routes/adminRoutes.js';
-import subCategoryRoutes from './routes/subCategoryRoutes.js'
-import orderRoutes from './routes/orderRoutes.js'
-import addressRoutes from './routes/addressRoutes.js'
-import contact from './routes/contact.js'
+const categoryRoutes = require('./routes/categoryRoutes');
+const productByCategoryRoutes = require('./routes/productByCategory');
+const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const subCategoryRoutes = require('./routes/subCategoryRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const addressRoutes = require('./routes/addressRoutes');
+const contactRoutes = require('./routes/contact');
 
 dotenv.config();
 
@@ -30,10 +31,11 @@ app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/subcategories', subCategoryRoutes);
-// app.use('/api/users', authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/addresses", addressRoutes)
-app.use("/api/contact", contact)
+app.use("/api/contact", contactRoutes)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 
 

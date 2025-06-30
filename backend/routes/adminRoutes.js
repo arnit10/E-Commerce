@@ -1,6 +1,6 @@
-import express from 'express';
-import Admin from '../models/Admin.js';
-import { loginAdmin } from '../controllers/adminController.js';
+const express = require('express');
+const Admin = require('../models/Admin');
+const { loginAdmin } = require('../controllers/adminController');
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.post('/register', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

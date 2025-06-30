@@ -2,12 +2,27 @@ const express = require('express')
 const router = express.Router()
 const Product = require('../models/Product')
 const verifyAdmin = require('../middleware/authMiddleware')
+const multer = require('multer');
+const path = require('path');
 
+// Multer setup
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + file.originalname;
+    cb(null, uniqueSuffix);
+  },
+});
+const upload = multer({ storage });
 
 //fetch all data
 router.get('/', async(req , res)=>{
     try{
-        const products = await Product.find().populate('category')
+        const products = await Product.find()
+        .populate('category')
+        .sort({createdAt: -1})
         res.json(products)
     }catch(error){
         res.status(500).json({message:"Error: ",error})
@@ -18,7 +33,8 @@ router.get('/', async(req , res)=>{
 // Get product by ID
 router.get('/:id', async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id).populate('category');
+    const product = await Product.findById(req.params.id).populate('category')
+    
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
@@ -29,9 +45,27 @@ router.get('/:id', async (req, res) => {
 });
 
 // Add product (admin only)
-router.post('/', verifyAdmin, async (req, res) => {
+router.post('/', verifyAdmin, upload.array('images', 5), async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    const {
+      title, description, brand, price, mrp, discount,
+      category, subcategory, inStock
+    } = req.body;
+    const imagePaths = req.files.map((file) => `/uploads/${file.filename}`);
+
+    const newProduct = new Product({
+      title,
+      description,
+      brand,
+      price,
+      mrp,
+      discount,
+      category,
+      subcategory,
+      inStock,
+      images: imagePaths, // <-- store image paths in array
+    });
+
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {

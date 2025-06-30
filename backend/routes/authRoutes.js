@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const {signup, login, getAllUsers, deleteUser} = require('../controllers/authController')
+const {signup, login, getAllUsers, deleteUser, sendOtp} = require('../controllers/authController')
 
+router.post("/send-otp", sendOtp);
 router.post('/signup', signup)
 router.post('/login', login)
 

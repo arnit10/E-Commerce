@@ -55,7 +55,12 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
           <div key={product._id} className="border p-4 rounded shadow">
-            <img src={product.image} alt={product.name} className="h-40 object-contain w-full" />
+            {/* <img src={product.image} alt={product.name} className="h-40 object-contain w-full" /> */}
+            <img 
+  src={`http://localhost:5000${product.images?.[0]}`} 
+  alt={product.title} 
+  className="h-50 object-contain w-full" 
+/>
             <h2 className="text-xl font-bold mt-2">{product.title}</h2>
             <p className="text-gray-700">₹{product.price}</p>
             <div className="mt-3 flex gap-2">
