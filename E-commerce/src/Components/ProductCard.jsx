@@ -25,11 +25,6 @@ const ProductCard = ({ product }) => {
     <div className="border rounded p-4 shadow hover:shadow-md transition">
       <div onClick={handleClick}>
         <div className="h-80 bg-gray-100 mb-2">
-        {/* <img
-          src={product.image}
-          alt={product.title}
-          className="h-full w-full object-cover"
-        /> */}
         <img
           src={`http://localhost:5000${product.images[0]}`}
           alt={product.title}
