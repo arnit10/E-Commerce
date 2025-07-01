@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const BASE_URL = "http://localhost:5000/api/products";
+  const BASE_URL = "/api/products";
 
   useEffect(() => {
     const fetchProducts = async () => {

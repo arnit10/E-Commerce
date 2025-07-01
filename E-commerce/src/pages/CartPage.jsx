@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeFromCart,
@@ -28,7 +28,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/addresses", {
+        const res = await axios.get("/api/addresses", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setAddresses(res.data);
@@ -63,7 +63,7 @@ const CartPage = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/orders", orderData, {
+      await axios.post("/api/orders", orderData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

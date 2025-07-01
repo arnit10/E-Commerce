@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from "../utils/axios";
 import { NavLink } from 'react-router-dom'
 
 const CategoriesBar = () => {
     const [categories , setCategories] = useState([])
     const fetchCategories = async ()=>{
        try{
-        const res = await axios.get('http://localhost:5000/api/categories')
+        const res = await axios.get('/api/categories')
         setCategories(res.data)
        } catch(err){
         console.error("Error fetching categories:",err)

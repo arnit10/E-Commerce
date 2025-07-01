@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../utils/axios"
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get("/api/products");
       setProducts(res.data);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
+      await axios.delete(`/api/products/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },  
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
         {products.map((product) => (
           <div key={product._id} className="border p-4 rounded shadow">
             <img 
-              src={`http://localhost:5000${product.images?.[0]}`} 
+              src={`${import.meta.env.VITE_API_BASE_URL}${product.images?.[0]}`} 
               alt={product.title} 
               className="h-50 object-contain w-full" 
             />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
+import axios from "../utils/axios";
 import dayjs from "dayjs"
 import { useSelector } from "react-redux"
 
@@ -11,7 +11,7 @@ const UserOrders = () => {
 
   const fetchUserOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/orders/my-orders", {
+      const res = await axios.get("/api/orders/my-orders", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

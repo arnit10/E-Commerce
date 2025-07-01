@@ -15,7 +15,7 @@ const Contact = () => {
     const handleSubmit = async(e) =>{
         e.preventDefault();
         try{
-            await axios.post("http://localhost:5000/api/contact", formData)
+            await axios.post("/api/contact", formData)
             alert('Form Submitted..')
             setFormData({name:'', email:'' , message: '' }) // will reset form
         }catch(error){

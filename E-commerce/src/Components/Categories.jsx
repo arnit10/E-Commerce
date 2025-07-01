@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import { NavLink } from "react-router-dom";
 
 const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
@@ -12,7 +12,7 @@ const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
   // Fetch all categories
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get("/api/categories");
       setCategories(res.data);
 
       // For each category, fetch its subcategories
@@ -26,7 +26,7 @@ const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
   const fetchSubcategories = async (categoryId) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/subcategories?categoryId=${categoryId}`
+        `/api/subcategories?categoryId=${categoryId}`
       );
       setSubcategoryMap((prev) => ({ ...prev, [categoryId]: res.data }));
     } catch (error) {
@@ -40,7 +40,7 @@ const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
     if (!categoryName.trim()) return alert("Category name is required");
     try {
       await axios.post(
-        "http://localhost:5000/api/categories",
+        "/api/categories",
         { name: categoryName },
         {
           headers: {
@@ -64,7 +64,7 @@ const Categories = ({ showSubcategories = true,  isAdmin= false }) => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/categories/${id}`, {
+      await axios.delete(`/api/categories/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
@@ -84,7 +84,7 @@ const handleAddSubcategory = async (categoryId) => {
     console.log("Sending subcategory:", { name, category: categoryId });
 
     await axios.post(
-      "http://localhost:5000/api/subcategories",
+      "/api/subcategories",
       {
         name,
         category: categoryId,
@@ -111,7 +111,7 @@ const handleDeleteSubcategory = async (subcategoryId, categoryId) => {
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`http://localhost:5000/api/subcategories/${subcategoryId}`
+    await axios.delete(`/api/subcategories/${subcategoryId}`
         ,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,

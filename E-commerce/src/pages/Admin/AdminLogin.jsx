@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../utils/axios";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +8,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", { email, password });
+      const res = await axios.post("/api/admin/login", { email, password });
       localStorage.setItem("adminToken", res.data.token);
       alert("Login successful");
       window.location.href = "/admin";

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import axios from 'axios'
+import axios from "../utils/axios";
 import {Link, useNavigate} from 'react-router-dom'
 import SignupPage from "./SignupPage"
 import { useDispatch } from 'react-redux'
@@ -20,7 +20,7 @@ export const LoginPage = () =>{
         setLoading(true);
 
         try{
-            const response = await axios.post("http://localhost:5000/api/auth/login",{
+            const response = await axios.post("/api/auth/login",{
                 email,
                 password
             }, { withCredentials: true });

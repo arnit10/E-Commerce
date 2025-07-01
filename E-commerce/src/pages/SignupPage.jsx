@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from "../utils/axios";
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ const SignupPage = () => {
     if (!email) return alert("Please enter your email first");
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/send-otp", {
+      const res = await axios.post("/api/auth/send-otp", {
         email,
       });
       alert(res.data.message);
@@ -36,7 +36,7 @@ const SignupPage = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post("/api/auth/signup", {
         name,
         email,
         password,

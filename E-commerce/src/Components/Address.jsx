@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../utils/axios"
 
 const Address = ({ onSelect, isCheckout = false }) => {
   const token = localStorage.getItem("token")
@@ -16,7 +16,7 @@ const Address = ({ onSelect, isCheckout = false }) => {
 
   const fetchAddresses = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/addresses", {
+      const res = await axios.get("/api/addresses", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -32,7 +32,7 @@ const Address = ({ onSelect, isCheckout = false }) => {
     try {
       if (editingId) {
         await axios.put(
-          `http://localhost:5000/api/addresses/${editingId}`,
+          `/${editingId}`,
           formData,
           {
             headers: {
@@ -41,7 +41,7 @@ const Address = ({ onSelect, isCheckout = false }) => {
           }
         );
       } else {
-        await axios.post("http://localhost:5000/api/addresses", formData, {
+        await axios.post("/api/addresses", formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

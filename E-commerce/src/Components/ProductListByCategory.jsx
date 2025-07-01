@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from "../utils/axios";
 import ProductCard from '../Components/ProductCard';
 
 const ProductListByCategory = () => {
@@ -10,7 +10,7 @@ const ProductListByCategory = () => {
   useEffect(() => {
     const fetchByCategory = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/products/category/${encodeURIComponent(name)}`); 
+        const res = await axios.get(`/category/${encodeURIComponent(name)}`); 
 
         setProducts(res.data);
       } catch (err) {
