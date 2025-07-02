@@ -59,7 +59,7 @@ const ProductDetails = () => {
   {product.images?.map((img, index) => (
     <SwiperSlide key={index}>
       <img
-        src={`http://localhost:5000${img}`}
+        src={`https://e-commerce-backend-8ywm.onrender.com${img}`}
         alt={`${product.title} ${index + 1}`}
         className="object-contain w-full h-full rounded-lg"
       />

@@ -97,7 +97,7 @@ const CartPage = () => {
                   <div className="flex p-4 justify-between">
                     <div className="w-20 rounded-4xl">
                       <img 
-                      src={`http://localhost:5000${item.images[0]}`} 
+                      src={`https://e-commerce-backend-8ywm.onrender.com${item.images[0]}`} 
                       alt={item.title} />
                     </div>
                     <div className="flex flex-col gap-2 items-center">
@@ -141,7 +141,6 @@ const CartPage = () => {
             <p>Items total: ₹{totalPrice.toLocaleString()}</p>
             <p>Free shipping above ₹499</p>
             {totalPrice > 499 ? (<p>Cart Total: ₹{totalPrice}</p>):(<p>Cart Total: ₹{(totalPrice + 49).toLocaleString()}</p>)}
-            {/* <p>Cart Total: ₹{(totalPrice + 49).toLocaleString()}</p> */}
 
             {addresses.length > 0 && (
               <div className="space-y-2">

@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
       <div onClick={handleClick}>
         <div className="h-80 bg-gray-100 mb-2">
         <img
-          src={`http://localhost:5000${product.images[0]}`}
+          src={`https://e-commerce-backend-8ywm.onrender.com${product.images[0]}`}
           alt={product.title}
           className="w-full h-full object-cover rounded"
         />
