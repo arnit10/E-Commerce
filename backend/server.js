@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.use('/api/categories', categoryRoutes);
-app.use('/api/products', productByCategoryRoutes);
+app.use('/api/products/category', productByCategoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);

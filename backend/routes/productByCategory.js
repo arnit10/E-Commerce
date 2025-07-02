@@ -4,7 +4,7 @@ const Product = require('../models/Product')
 const Category = require('../models/Category')
 
 //Get products by category
-router.get('/category/:name', async (req, res) =>{
+router.get('/:name', async (req, res) =>{
     try{
         const categoryName = req.params.name
         const category = await Category.findOne({ name: categoryName })

@@ -10,7 +10,7 @@ const ProductListByCategory = () => {
   useEffect(() => {
     const fetchByCategory = async () => {
       try {
-        const res = await axios.get(`/category/${encodeURIComponent(name)}`); 
+        const res = await axios.get(`/api/products/category/${encodeURIComponent(name)}`); 
 
         setProducts(res.data);
       } catch (err) {
